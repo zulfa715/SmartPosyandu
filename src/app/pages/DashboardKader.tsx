@@ -5,9 +5,29 @@ import { Baby, Calendar, Activity, TrendingUp, Building2, UserCircle, ArrowUp, A
 import { format, differenceInMonths } from 'date-fns';
 import { id } from 'date-fns/locale';
 
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
+
 export default function DashboardKader() {
   const { balita, pemeriksaan, jadwal } = useData();
   const { user } = useAuth();
+
+  const grafikPertumbuhan = [
+  { bulan: "Jan", bb: 3.2 },
+  { bulan: "Feb", bb: 4.1 },
+  { bulan: "Mar", bb: 5.3 },
+  { bulan: "Apr", bb: 6.2 },
+  { bulan: "Mei", bb: 6.8 },
+  { bulan: "Jun", bb: 7.5 },
+  { bulan: "Jul", bb: 8.0 },
+];
 
   const stats = useMemo(() => {
     const today = new Date();
@@ -195,6 +215,26 @@ export default function DashboardKader() {
         </div>
       )}
 
+<div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 mb-6">
+  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+    📈 Grafik Pertumbuhan Balita
+  </h2>
+
+  <ResponsiveContainer width="100%" height={300}>
+    <LineChart data={grafikPertumbuhan}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="bulan" />
+      <YAxis />
+      <Tooltip />
+      <Line
+        type="monotone"
+        dataKey="bb"
+        stroke="#ec4899"
+        strokeWidth={3}
+      />
+    </LineChart>
+  </ResponsiveContainer>
+</div>
       {/* Recent Examinations Table */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
         <div className="p-6 border-b border-gray-100 dark:border-gray-700">

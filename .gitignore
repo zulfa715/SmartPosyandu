@@ -3,3 +3,19 @@
 
 # Ada Library Information
 *.ali
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Logs
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
